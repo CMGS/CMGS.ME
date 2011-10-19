@@ -9,10 +9,4 @@ Reborn
 
 Reborn it.
 
-.. sourcecode: html
-
-    <div id="demo">
-        hello world
-    </div>
-
 Nolla means zero, or null.
