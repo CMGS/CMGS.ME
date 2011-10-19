@@ -13,12 +13,16 @@
         <link rel="alternate" type="application/rss+xml" href="{{content_url('feed.xml')}}" title="{{context.sitename}} Feed" />
         <link rel="stylesheet" href="{{ static_url('style.css') }}" />
         {% block afterstyle %}{% endblock %}
+        {% include "ga.html" %}
     </head>
     <body>
         <div id="wrapper">
             <div id="header">
                 <ul id="nav" class="fn-clear">
                     <li class="nav-item"><a href="/">Home</a></li>
+                    <li class="nav-item"><a href="/life/">Life</a></li>
+                    <li class="nav-item"><a href="/work/">Work</a></li>
+                    <li class="nav-item"><a href="/other/">Other</a></li>
                     <li class="nav-item"><a href="/tag/">Tags</a></li>
                     {% if context.gcse %}
                     <li id="nav-search">
