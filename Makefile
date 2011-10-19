@@ -4,7 +4,6 @@ clean:
 	mkdir bak
 	mv ./site/.git ./bak
 	mv ./site/README ./bak
-	mv ./site/404.html ./bak
 	mv ./site/Makefile ./bak
 	mv ./site/CNAME ./bak
 	rm -rf ./site
