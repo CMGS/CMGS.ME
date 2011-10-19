@@ -12,6 +12,12 @@
         column-count: 4;
         line-height: 150%;
     }
+    .about-cat {
+        background:transparent url("{{static_url('image/cat.jpg')}}") no-repeat scroll left 50px;
+        text-align: center;
+        height: 300px;
+        overflow: hidden;
+    }
 </style>
 <link rel="canonical" href="/" />
 {%- endblock -%}
@@ -19,10 +25,12 @@
 {%- block container -%}
 <article class="vcard">
 <h1 class="ui-desc">About</h1>
+<div class="about-cat">
+</p>
 <p>Who Am I</p>
 <p>mem.cmgs.me</p>
 <p>i.cmgs.me</p>
-
+</div>
 </article>
 
 <article>
