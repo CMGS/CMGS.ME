@@ -1,3 +1,6 @@
+publish:
+	(cd ./site && $(MAKE) -f Makefile) || exit 1;
+
 build:
 	liquidluck --config .config
 
