@@ -5,7 +5,6 @@ Reborn
 :folder: other
 :tags:
     - reborn
-    - iMilky
     - CMGS
 
 Reborn it.
@@ -16,4 +15,4 @@ Reborn it.
         hello world
     </div>
 
-In the milky way.
+Nolla means zero, or null.
