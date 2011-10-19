@@ -1,10 +1,14 @@
 publish: clean build deploy upload
 
 clean:
-	mv ./site/.git ./git-bak
+	mkdir bak
+	mv ./site/.git ./bak
+	mv ./site/README ./bak
+	mv ./site/404.html ./bak
+	mv ./site/Makefile ./bak
+	mv ./site/CNAME ./bak
 	rm -rf ./site
-	mkdir site
-	mv ./git-bak ./site/.git
+	mv ./bak ./site
 
 upload:
 	(cd ./site && $(MAKE) -f Makefile) || exit 1;
