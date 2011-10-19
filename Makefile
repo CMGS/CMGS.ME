@@ -1,4 +1,6 @@
-publish:
+publish: build deploy upload
+
+upload:
 	(cd ./site && $(MAKE) -f Makefile) || exit 1;
 
 build:
