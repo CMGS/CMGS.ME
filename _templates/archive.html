@@ -8,7 +8,9 @@
     {% for post in pager.posts %}
     <li class="ui-list-item">
     <h3 class="ui-article-title"><a href="{{content_url(post.slug)}}">{{post.title}}</a></h3>
+    {% if post.summary %}
     <p class="ui-article-desc">{{post.summary}}</p>
+    {% endif %}
     </li>
     {% endfor %}
 </ul>
