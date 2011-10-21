@@ -218,6 +218,7 @@ blockquote::after {
 }
 .nav-item {
     float: left;
+    padding-right: 5px\9;
 }
 .nav-item::before {
     content: "//";
