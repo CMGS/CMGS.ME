@@ -21,7 +21,7 @@
     .about-cat {
         background:transparent url("{{static_url('image/cat.jpg')}}") no-repeat scroll left 50px;
         height: 200px;
-        padding: 40px 200px;
+        padding-left: 200px;
         overflow: hidden;
     }
 </style>
@@ -31,9 +31,12 @@
 {%- block container -%}
 <article class="vcard">
 <h1 class="ui-desc">About</h1>
-<p class="about-cat">
-Good Guy
-</p>
+<div class="about-cat">
+<p>Hi, I am <strong class="fn">ZheFu Peng</strong> (aka <strong>CMGS</strong> elsewhere).</p>
+<p>Pythoner, Traveler, Photographer.</p>
+<p>I believe that god gave u life, and the road under u'r feet.</p>
+<p>You can find me on <a href="http://twitter.com/CMGS1988" rel="me">Twitter</a> or <a href="http://mem.cmgs.me/" rel="photo">DianDian</a>.  Contact me with <a class="email" href="mailto:lepture@me.com">Email</a> .</p>
+</div>
 </article>
 
 <article>
