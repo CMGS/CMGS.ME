@@ -15,3 +15,4 @@ tags: reborn, CMGS
 
 Anyway，既然万事俱备，那就重新开始吧。
 
+P.S. Nolla means ZERO. 芬兰语，之前想用Void或者Vuoto，最后还是选择了Nolla。
