@@ -5,6 +5,7 @@
 <style type="text/css">
     article {
         margin-bottom: 20px;
+        overflow: hidden;
     }
     article ul {
         -webkit-column-count: 4;
@@ -20,8 +21,10 @@
     }
     .about-cat {
         background:transparent url("{{static_url('image/cat.jpg')}}") no-repeat scroll left 10px;
-        padding-left: 200px;
-        overflow: hidden;
+        width: 146px;
+        height: 120px;
+        float: left;
+        margin-right:54px;
     }
 </style>
 <link rel="canonical" href="/" />
@@ -30,12 +33,11 @@
 {%- block container -%}
 <article class="vcard">
 <h1 class="ui-desc">About</h1>
-<div class="about-cat">
+<div class="about-cat"></div>
 <p>Hi, I am <strong class="fn">ZheFu Peng</strong> (aka <strong>CMGS</strong> elsewhere).</p>
 <p>Pythoner, Traveler, Photographer.</p>
 <p>I believe that god gave you life, and the road under your feet.</p>
 <p>You can find me on <a href="http://twitter.com/CMGS1988" rel="me">Twitter</a> or <a href="http://mem.cmgs.me/" rel="photo">DianDian</a>.  Contact me with <a class="email" href="mailto:lepture@me.com">Email</a> .</p>
-</div>
 </article>
 
 <article>
