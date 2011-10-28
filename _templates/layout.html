@@ -5,7 +5,7 @@
         <title>{% block title %}{{context.sitename}}{% endblock %}</title>
         <script>if (top !== self) top.location = self.location;</script>
         <meta name="HandheldFriendly" content="True" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
         {% block author %}
         <meta name="author" content="{{ context.author }}" />
         {% endblock %}
@@ -13,21 +13,12 @@
         <link rel="alternate" type="application/rss+xml" href="{{content_url('feed.xml')}}" title="{{context.sitename}} Feed" />
         <link rel="stylesheet" href="{{ static_url('style.css') }}" />
         {% block afterstyle %}{% endblock %}
-        <!--[if IE]>
-            <script src="{{static_url('js/html5.js')}}"></script>
-        <![endif]-->
-        {% include "ga.html" %}
     </head>
     <body>
         <div id="wrapper">
             <div id="header">
                 <ul id="nav" class="fn-clear">
                     <li class="nav-item"><a href="/">Home</a></li>
-                    <li class="nav-item"><a href="http://mem.cmgs.me">Photo</a></li>
-                    <li class="nav-item"><a href="/life/">Life</a></li>
-                    <li class="nav-item"><a href="/work/">Work</a></li>
-                    <li class="nav-item"><a href="/other/">Other</a></li>
-                    <li class="nav-item"><a href="/archive.html">Archive</a></li>
                     <li class="nav-item"><a href="/tag/">Tags</a></li>
                     {% if context.gcse %}
                     <li id="nav-search">
@@ -45,9 +36,6 @@
             <div id="footer">
                 <div class="copyrith ft-right">Copyright by <a href="{{context.siteurl}}">{{context.sitename}}</a> | Powered by <a href="http://github.com/lepture/liquidluck">Felix Felicis</a></div>
             </div>
-            {% block beforejquery %}{% endblock %}
-            <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-            {% block afterjquery %}{% endblock %}
         </div>
     </body>
 </html>
