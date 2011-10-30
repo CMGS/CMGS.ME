@@ -13,6 +13,10 @@
         <link rel="alternate" type="application/rss+xml" href="{{content_url('feed.xml')}}" title="{{context.sitename}} Feed" />
         <link rel="stylesheet" href="{{ static_url('style.css') }}" />
         {% block afterstyle %}{% endblock %}
+        <!--[if IE]>
+            <script src="{{static_url('js/html5.js')}}"></script>
+        <![endif]-->
+        {% include "ga.html" %}
     </head>
     <body>
         <div id="wrapper">
