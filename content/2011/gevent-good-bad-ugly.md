@@ -161,7 +161,7 @@ if __name__ == '__main__':
             port='10001',
             use_threadpool=True,
             threadpool_workers=concurrency
-        ）
+        )
 [/sourcecode]
 
 For the client, I used Apache bench with the following options:
