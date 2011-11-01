@@ -1,6 +1,6 @@
 --------------
 title: gevent: the Good, the Bad, the Ugly
-summary: 这是一篇翻译的文章，[原文](http://code.mixpanel.com/gevent-the-good-the-bad-the-ugly/)
+summary: 这是一篇翻译的文章，原文见：http://code.mixpanel.com/gevent-the-good-the-bad-the-ugly/
 date: 2011-11-01
 folder: work
 tags: python, gevent
