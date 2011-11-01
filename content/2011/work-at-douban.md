@@ -2,7 +2,7 @@
 title: New work@Douban
 summary: 离职北上去工作.
 date: 2011-10-19
-folder: life 
+folder: life
 tags: python, douban
 --------------
 
