@@ -1,6 +1,6 @@
 --------------
-title: gevent the Good, the Bad, the Ugly
-summary: 这是一篇翻译的文章
+title: gevent: the Good, the Bad, the Ugly
+summary: 这是一篇翻译的文章，[原文](http://code.mixpanel.com/gevent-the-good-the-bad-the-ugly/)
 date: 2011-11-01
 folder: work
 tags: python, gevent
@@ -265,7 +265,6 @@ Simply put: it’s not good. I probably read more gevent source code than I did 
 简单的说，这货一般般。我大概读了比文档更多的Gevent源码（这样很有用！）。事实上最好的文档就是源码目录下的那些示例代码。如果你有问题，认真的瞄瞄看它们先。同时我也花了很多时间用Google去搜索邮件列表的存单。
 
 ###Incompatibilities
-
 ###兼容性
 
 I’m specifically talking about eventlet here. In retrospect, this makes sense, but it can lead to some baffling failures. We had some MongoDB client code that was using eventlet. It simply didn’t work from the server process I was working on using gevent.
@@ -273,7 +272,6 @@ I’m specifically talking about eventlet here. In retrospect, this makes sense,
 这里我特别想提到eventlet。回想起来，这是有一定道理的，它会导致一些匪夷所思的故障。我们用了一些eventlet在MongoDB客户端（译者注：一种高性能文档型数据库）代码上。当我使用Gevent的时候，它根本不能在服务器上运行。
 
 ###Order matters. Ugh.
-
 ###呃，使用顺序错误
 
 Daemonize before you import gevent or at least before you call monkey.patch_all(). I didn’t look into this deeply, but what I gathered from a mailing list post or two is that gevent modifies a socket in python internals. When you daemonize, all open file descriptors are closed, so in children, the socket will be recreated in its unmodified form, which of course doesn’t work right with gevent. Gevent should handle this type of thing or at least provide a daemonize function that is compatible.
