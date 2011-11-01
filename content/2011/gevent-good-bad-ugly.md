@@ -272,9 +272,9 @@ I’m specifically talking about eventlet here. In retrospect, this makes sense,
 
 这里我特别想提到eventlet。回想起来，这是有一定道理的，它会导致一些匪夷所思的故障。我们用了一些eventlet在MongoDB客户端（译者注：一种高性能文档型数据库）代码上。当我使用Gevent的时候，它根本不能在服务器上运行。
 
-Order matters. Ugh.
+###Order matters. Ugh.
 
-呃，使用顺序错误
+###呃，使用顺序错误
 
 Daemonize before you import gevent or at least before you call monkey.patch_all(). I didn’t look into this deeply, but what I gathered from a mailing list post or two is that gevent modifies a socket in python internals. When you daemonize, all open file descriptors are closed, so in children, the socket will be recreated in its unmodified form, which of course doesn’t work right with gevent. Gevent should handle this type of thing or at least provide a daemonize function that is compatible.
 
