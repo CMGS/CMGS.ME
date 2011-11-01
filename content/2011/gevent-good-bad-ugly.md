@@ -188,9 +188,8 @@ I initially thought I would need some way to limit the threaded solution to one 
 
 我最初以为我需要用一些方法来限制线程方案到一个CPU上，但事实证明就算这VPS号称是“四核”，你也就只能让一个核心到100%。就是这么蛋疼。
 
-Linux tweaks for load testing
-
-负载测试中所做的Linux优化
+###Linux tweaks for load testing
+###负载测试中所做的Linux优化
 
 I ran into a whole host of issues getting Linux working past ~500 connections per second.
 
@@ -204,9 +203,8 @@ In other words, you probably wouldn’t see any of these problems in production,
 
 换句话说，你可能在生产环境中不会遇到这些问题，但几乎可以肯定的是这些问题一定会出现在测试环境中（除非你在后端跑一个单向代理）。
 
-Increase the client port range
-
-增加客户端端口范围
+####Increase the client port range
+####增加客户端端口范围
 
 > echo -e ’1024\t65535′ | sudo tee /proc/sys/net/ipv4/ip_local_port_range
 
@@ -214,9 +212,8 @@ This increases the number of available ports to use for client connections. You�
 
 这一步将会使得客户端的连接有更多的可用的端口。没有这个的话你会很快的用尽所有端口（然后连接就处于TIME_WAIT状态）。
 
-> Enable TIME_WAIT recycling
-
-启用TIME_WAIT复用
+####Enable TIME_WAIT recycling
+####启用TIME_WAIT复用
 
 > echo 1 | sudo tee /proc/sys/net/ipv4/tcp_tw_recycle
 
@@ -224,9 +221,8 @@ This helps with connections stuck in TIME_WAIT as well and is basically required
 
 这也会优化停留在TIME_WAIT的连接，当然这种优化至少需要每秒含有同样IP对连接超过一定数量的时候才会起作用。同时另一个叫做tcp_tw_reuse的参数也能起到同样的作用，但我不需要用到它。
 
-Disable syncookies
-
-关闭同步标签
+####Disable syncookies
+####关闭同步标签
 
 > echo 1 | sudo tee /proc/sys/net/ipv4/tcp_syncookies
 
@@ -234,17 +230,15 @@ If you see “possible SYN flooding on port 10001. Sending cookies.” in dmesg,
 
 当你看到”possible SYN flooding on port 10001. Sending cookies.”这种信息的时候，你可能需要关闭同步标签（tcp_syncookies）。在你生产环境的服务器上不要做这样的事情，这样做会导致连接重置，只是测试的话还是没问题的。
 
-Disable iptables if you’re using connection tracking
-
-如果用到了连接追踪，关闭iptables
+####Disable iptables if you’re using connection tracking
+####如果用到了连接追踪，关闭iptables
 
 You’ll quickly fill up the netfilter connection table. Alternatively, you try increasing /proc/sys/net/netfilter/nf_conntrack_max, but I think it’s easier just to disable the firewall while testing.
 
 你将会很快的填满你netfiler表。当然咯，你可以尝试增加/proc/sys/net/netfilter/nf_conntrack_max中的数值，但是我想最简单的还是在测试的时候关闭防火墙更好吧。
 
-Raise open file descriptor limits
-
-提高文件描述符限制
+####Raise open file descriptor limits
+####提高文件描述符限制
 
 At least on Ubuntu, the open files limit for normal users defaults to 4096. So, if you want to test with more than ~4000 simultaneous connections you need to bump this up. The easiest way is to add a line to /etc/security/limits.conf like “* hard nofile 16384″ and then run ulimit -n 16384 before running your tests.
 
