@@ -1,5 +1,6 @@
 --------------
 title: 凌晨1点
+summary: 一个人看完灵异小说的感想
 date: 2011-08-03
 folder: life
 tags: 生活, 感想, 读后感
