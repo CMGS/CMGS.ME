@@ -7,7 +7,7 @@ server:
 clean:
 	rm -fr _site/
 
-deploy:
+upload:
 	(cd ./site && git add && git commit -am 'update' && git push) || exit 1;
 
 update:
@@ -15,5 +15,5 @@ update:
 	git commit -am 'update content'
 	git push
 
-deploy: update build deploy
+deploy: update build upload
 
