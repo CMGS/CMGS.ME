@@ -62,7 +62,7 @@ There are some caveats, but I’ll get back to those later.
 For now, here’s the kind of performance improvement you can expect:
 接下来，见证性能奇迹的时候到了。
 
-![图1](http://farm6.static.flickr.com/5133/5534035187_4a0af91dc9_b.jpg)
+<center>![alt](http://farm6.static.flickr.com/5133/5534035187_4a0af91dc9_b.jpg 图1)</center>
 
 Thoughts
 
@@ -100,7 +100,7 @@ Here’s the python code I used for both tests:
 
 这是我用来测试的Python代码:
 
-[sourcecode:python]
+```python
 #!/usr/bin/env python
 
 import sys
@@ -165,7 +165,7 @@ if __name__ == '__main__':
             use_threadpool=True,
             threadpool_workers=concurrency
         )
-[/sourcecode]
+```
 
 For the client, I used Apache bench with the following options:
 
