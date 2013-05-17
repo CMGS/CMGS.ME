@@ -8,7 +8,7 @@ clean:
 	rm -fr _site/
 
 upload:
-	(cd ./_site && git add && git commit -am 'update' && git push) || exit 1;
+	(cd ./_site && git add . && git commit -am 'update' && git push) || exit 1;
 
 update:
 	git add .
