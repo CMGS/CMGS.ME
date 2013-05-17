@@ -1,8 +1,9 @@
------------
-title: 重新归来
-date: 2011-10-19
-folder: other
-tags: reborn, CMGS
+# 重新归来
+
+- date: 2011-10-19
+- category: life
+- tags: reborn, CMGS
+
 -----------
 
 大部分时间已经没有开始写Blog了，在天朝坑爹的GFW习惯之下，访问VPS已经成为了一种很慢的过程，加之自己实际上并不是很喜欢Wordpress的重，于是就渐渐停止了iMilky的Blog。

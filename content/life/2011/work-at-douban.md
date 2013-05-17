@@ -1,9 +1,11 @@
---------------
-title: New work@Douban
-summary: 离职北上去工作.
-date: 2011-10-19
-folder: life
-tags: python, douban
+# New work@Douban
+
+- category: life
+- date: 2011-10-19
+- tags: python, douban
+
+离职北上去工作
+
 --------------
 
 很久没写文章了，其实这篇文章从6月10日正式从金山离职就开始想，是该写点什么东西来祭奠过去的日子，一直拖到生日，还是因为种种原因又继续拖到了今天。

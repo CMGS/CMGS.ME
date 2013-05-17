@@ -1,10 +1,13 @@
+# gevent: the Good, the Bad, the Ugly
+
+- category: life
+- date: 2011-11-01
+- tags: python, gevent
+
+这是一篇翻译的文章，原文见：http://code.mixpanel.com/gevent-the-good-the-bad-the-ugly/
+
 --------------
-title: gevent: the Good, the Bad, the Ugly
-summary: 这是一篇翻译的文章，原文见：http://code.mixpanel.com/gevent-the-good-the-bad-the-ugly/
-date: 2011-11-01
-folder: work
-tags: python, gevent
---------------
+
 这是一篇翻译的文章，原文见[http://code.mixpanel.com/gevent-the-good-the-bad-the-ugly/](http://code.mixpanel.com/gevent-the-good-the-bad-the-ugly/)
 
 转载的话麻烦加入原文和译者信息，谢谢。

@@ -1,63 +1,35 @@
 {% extends "layout.html" %}
 
-{%- block afterstyle -%}
-<meta name="keywords" content="CMGS, ZheFu Peng" />
+{% block afterstyle %}
 <style type="text/css">
-    article {
-        margin-bottom: 20px;
-        overflow: hidden;
+    #main h2 {
+        font: normal normal 12px "Helvetica", arial, sans-serif;
+        text-transform: uppercase;
+        color: #bcbcbc;
     }
-    article ul {
-        -webkit-column-count: 4;
-        -moz-column-count: 4;
-        column-count: 4;
-        line-height: 150%;
-        float: left\9;
-        width: 100%\9
-    }
-    article ul li {
-        float: left\9;
-        width: 23%\9;
-    }
-    .about-cat {
-        background:transparent url("{{static_url('image/cat.jpg')}}") no-repeat scroll left 10px;
-        width: 146px;
-        height: 120px;
-        float: left;
-        margin-right:54px;
+    #main h3 {
+        font-family: "Helvetica", arial, sans-serif;
     }
 </style>
-<link rel="canonical" href="/" />
-{%- endblock -%}
+{% endblock %}
 
-{%- block container -%}
-<article class="vcard">
-<h1 class="ui-desc">About</h1>
-<div class="about-cat"></div>
-<p>Hi, I am <strong class="fn">ZheFu Peng</strong> (aka <strong>CMGS</strong> elsewhere).</p>
-<p>Pythoner, Traveler, Photographer.</p>
-<p>I believe that god gave you life, and the road under your feet.</p>
-<p>You can find me on <a href="http://twitter.com/CMGS1988" rel="me">Twitter</a> or <a href="http://mem.cmgs.me/" rel="photo">DianDian</a>.  Contact me with <a class="email" href="mailto:ilskdw@gmail.com">Email</a> .</p>
-</article>
+{% block main %}
+<div class="entry-content">
+    {{post.content}}
+</div>
 
-<article>
-<h1 class="ui-desc">Do</h1>
-<ul>
-    <li><a href="http://github.com/CMGS/tproxy">Tproxy</a></li>
-    <li><a href="http://mem.cmgs.me">Memory</a></li>
-</ul>
-</article>
-<article> 
-<h1 class="ui-desc">Place</h1>
-<ul>
-    <li><a href="http://twitter.com/CMGS1988" rel="me, nofollow">Twitter</a></li>
-    <li><a href="https://bitbucket.org/CMGS" rel="me, nofollow">BitBucket</a></li>
-    <li><a href="http://github.com/CMGS" rel="me, nofollow">Github</a></li>
-    <li><a href="http://facebook.com/cmgs1988" rel="me, nofollow">Facebook</a></li>
-    <li><a href="http://www.douban.com/people/CMGS" rel="me, nofollow">Douban</a></li>
-    <li><a href="http://weibo.com/cmgs" rel="me, nofollow">Weibo</a></li>
-    <li><a href="http://cmgs1988.42qu.com" rel="me, nofollow">42qu</a></li>
-    <li><a href="http://renren.com/cmgs" rel="me, nofollow">RenRen</a></li>
-</ul>
-</article>
-{%- endblock -%}
+<h2>Recent Updates</h2>
+<div class="entry-list">
+    {% for cat in resource.category -%}
+    <h3>{{cat|title}}</h3>
+    {% set posts = resource.category[cat][:5] -%}
+    {% for post in posts -%}
+    <div class="entry-item">
+        <time class="updated" datetime="{{post.date|xmldatetime}}">{{post.date.strftime("%Y-%m-%d")}}</time>
+        <a href="{{ post|permalink }}">{{post.title}}</a>
+    </div>
+    {%- endfor %}
+    {% endfor %}
+</div>
+{% endblock %}
+
