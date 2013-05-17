@@ -74,8 +74,13 @@ theme = {
             {'title': 'Archive', 'link': '/archive'},
         ],
         'elsewhere': [
+            {'name': 'Photo', 'link': 'http://mem.cmgs.me'},
             {'name': 'GitHub', 'link': 'https://github.com/CMGS'},
+            {'name': 'Bitbucket', 'link': 'https://bitbucket.org/CMGS'},
             {'name': 'Twitter', 'link': 'https://twitter.com/CMGS1988'},
+            {'name': 'Facebook', 'link': 'http://facebook.com/cmgs1988'},
+            {'name': 'Douban', 'link': 'http://www.douban.com/people/CMGS'},
+            {'name': 'Weibo', 'link': 'http://weibo.com/cmgs'},
         ],
 
         'descriptions': {
