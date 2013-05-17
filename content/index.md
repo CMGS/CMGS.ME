@@ -5,6 +5,7 @@
 ---------
 
 <center>![alt](/media/cat.jpg)</center>
+<center>**God is in his heaven . all's right with the world.**</center>
 
 Hi! My name is **Kelvin Peng** (aka **CMGS** elsewhere).
 
