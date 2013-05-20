@@ -2,7 +2,7 @@
 
 - category: life
 - date: 2011-10-19
-- tags: python, douban
+- tags: life, work
 
 离职北上去工作
 

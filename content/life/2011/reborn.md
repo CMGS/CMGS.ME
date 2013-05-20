@@ -2,7 +2,7 @@
 
 - date: 2011-10-19
 - category: life
-- tags: reborn, CMGS
+- tags: life
 
 -----------
 

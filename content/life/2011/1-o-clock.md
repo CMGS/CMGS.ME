@@ -2,7 +2,7 @@
 
 - category: life
 - date: 2011-08-03
-- tags: 生活, 感想, 读后感
+- tags: life
 
 一个人看完灵异小说的感想
 
