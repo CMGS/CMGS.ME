@@ -1,0 +1,59 @@
+# 2013 QCon
+
+- date: 2013-04-27 17:00
+- tags: work
+- category: life
+
+2013 QCon Beijing 的一些感想
+
+-------------------
+
+4月下旬参加了今年的QCon Beijing，当然一如既往的是饭好吃会就比较水了，而且今年的礼品都大规模的缩水了擦=。=
+
+同时在24日晚上，参加了QCon前夕的Github的Drinkup，结合会上了解到的信息和厂里面Code的发展，所以就先说说我的看法吧。
+
+P.S. Github的2哥们一看就是第一次来中国，掏心掏肺的说lol
+
+Github：
+
+先说协议设计，对于Github而言，HTTP直接转HTTPS，SSH走的是改造过的SSHD（前端接到请求去问MySQL），Git协议走Git Daemon。目前Code系统是用的Http协议，但是如果以后走卖服务的路子来讲的话，SSH协议的支持应该是被早日提上议程的。
+
+先抛开Git协议不谈，HTTP/HTTPS 完全走 nginx balance 即可，横向扩展也不会出现太多问题，至于仓库的 Balance 我在后面会详说。而SSH协议的Balance最大的问题是在于SSH协议需要系统的登陆权限去运行 ``git upload-pack pengzhefu/farm`` 这样的命令，这是不安全的，而且不好做扩展，新增加的Load-Balancer都需要有用户的 Public Key。
+
+而Github 他们改造了SSHd 服务，使得这货能查数据库，简单的来说就是 SSHd 的服务去验证授权，授权过了直接走内部的SSH行为拿数据。这个行为上其实就是把你执行 `` git clone git@github.com/pengzhefu/xxxx `` 过了一层透明代理去 FileServer 拿数据，体验上和直接执行 Git 的 ssh 协议一致，当然扩展也很容易了，前端节点都是对等的验证服务。
+
+所以其实对于 Code 支持 SSH 协议而言，用 *PAM_MYSQL* 似乎是个可行的方案，但是这货虽然是系统级的，它却只能支持user/pass 验证，和证书是毛关系都搭不上，如果尝试一些Python实现的SSH protocol库也许会更好, 比如*paramiko*，个人觉得这是个方向, 略微看了一下实现，基于线程实现的服务端，也比较容易切换为Gevent compatible。
+
+[协议介绍 How we made github fast](https://github.com/blog/530-how-we-made-github-fast)  
+[Native Python SSHv2 protocol library](https://github.com/paramiko/paramiko/)  
+[SSH authentication via PAM-MySQL](http://mailman.linuxchix.org/pipermail/techtalk/2007-April/021894.html)  
+
+接下来说下 FileServer ，Github 的数据来说是分34个节点，68个服务器（1主1备），分2机房，一个出了问题failover到备份机，如果某节点快满的时候会迁移这个节点上某个中型（中型的定义是什么？）库到另外一个节点（按照他们的说法是这么多年也就一个用户发现过这种迁移带来的不可用），其他的细节就比较少了，比如如何分布的，增加和减少节点如何。
+
+对于 Code 而言，我现在也在做分布式的一些事情，大体上的设计就是Consistent hash保证节点变化的时候影响比较少的库，简单的做节点增减的话就是节点crash直接不care，读写不能就玩蛋去，如果一定要保证读写做个主备就好了，增加节点的话计算已有的库，算出要迁移的库直接走脚本迁移，分布策略则用原始库和其Fork库放同一节点即可，方便做Pull-request。
+
+复杂的做也行，减少节点用主备自动切换，等于就是在git服务接到请求之后有个failover的过程，不细表了。增加节点的话做这么几件事：
+
+1. 当 app server 发现 repo 的 node 变化的时候 old file node 保持这次服务。
+2. 同时 app server 把 查找这个 repo 以及 它的 fork 和它的 parent，用 git 命令 push 到新 file node。
+3. push 完毕修正 app server 里面 file node 的记录，同时再次同步一次 old file node 数据。
+4. 删除 old file node 上的数据，下一次请求来的时候就会走新 node 了。
+
+大体上我觉得这样就差不多了，git 本身分布式仓库模式蛮好的。
+
+至于 *Hubot* 和运维方案就不细表了，只能说这种工作方式很吸引人啊啊啊啊（无限回音）。
+
+WAF, 道哥
+
+第二场的乐峰网感觉一般…三分靠人力七分靠天命，第三场是道哥的『我们重新定义了WAF』这场，个人觉得吧，大体上WAF也就给屌丝用的，结合DNS解析会有一番作为（所以他们和DNSPod搞上了），应该是看中了买不起硬件防御或者请不起安全专家的长尾站长。WAF 这货的门槛应该就是：
+
+1. 流量重定向
+2. 流量过滤（人工筛选+机器筛选，机器的话需要各种安全专家调教）
+
+但是个人觉得安全这东西和业务其实是相关的，通用的流量过滤方案对付一些比较偏的攻击应该也无能为力吧。再者是说到搜索引擎SEO问题，道哥的意思是判定爬虫就直接开放后台IP，试想一下如果能有人社工进某搜索引擎内网，伪装爬虫流量这层WAF防御就基本上是虚设的了。
+
+第二天的会上午没来，下午先说听了一场我厂胖子的兴趣图谱…我能说细节基本都忘记了么TAT，不过大体上还是记得很清楚就是这货要和业务结合，算法现在设置比较保守。余下的2场其实没多大意思，人人的比较水，阿里的其实本来不该水的…不过说到他们的PR会审核他们的PPT，删掉认为敏感的数据so其实整场下来感觉一般…无外乎就是Hadoop的应用一类的，却又给不出阿里是怎么用的。
+
+第三天先是听了金山云的东西，我只能说大哥你能不能不要在以前的架构上加个缓存优化下就换个名字唉…最后一场是搜狐的云平台，基本上和我厂的DAE就是一个东西…同步率400%…更加详细的资料可以等基友去了搜狐弄点一手情报研究下恩。至于下午算是被坑了，NASA火星计划的排到了第二场，JAVA那货谁care你啊你大爷的，不过其实NASA用AWS的topic听下来的感觉和听说NASA雇佣SpaceX火箭一样…牛逼的东西还是NASA自持。
+
+基本上QCon是一年比一年水了，去年好歹发过包，领了好多衣服，吃得也好，今年毛都没了TAT，再者不得不再感叹一句Github的哥们还真是厚道呐。
