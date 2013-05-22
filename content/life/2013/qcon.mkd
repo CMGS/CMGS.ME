@@ -24,7 +24,7 @@ Github：
 
 所以其实对于 Code 支持 SSH 协议而言，用 *PAM_MYSQL* 似乎是个可行的方案，但是这货虽然是系统级的，它却只能支持user/pass 验证，和证书是毛关系都搭不上，如果尝试一些Python实现的SSH protocol库也许会更好, 比如*paramiko*，个人觉得这是个方向, 略微看了一下实现，基于线程实现的服务端，也比较容易切换为Gevent compatible。
 
-[协议介绍 How we made github fast](https://github.com/blog/530-how-we-made-github-fast)  
+[How we made github fast](https://github.com/blog/530-how-we-made-github-fast)  
 [Native Python SSHv2 protocol library](https://github.com/paramiko/paramiko/)  
 [SSH authentication via PAM-MySQL](http://mailman.linuxchix.org/pipermail/techtalk/2007-April/021894.html)  
 
