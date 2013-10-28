@@ -36,6 +36,6 @@ D3 Tal 到 Chame
 D4 Chame 到 Manang  
 D5 Manang 到 Tilicho Base Camp  
 D6 Tilicho Lake 到 Yak Kharka  
-D7 Yak Kharka 过 Thorong La Pass 到 Muktinath
-D8 Muktinath 到 Jomson
+D7 Yak Kharka 过 Thorong La Pass 到 Muktinath--
+D8 Muktinath 到 Jomson--
 
