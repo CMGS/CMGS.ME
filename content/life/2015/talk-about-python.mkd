@@ -1,7 +1,7 @@
 # 说说这篇「我为什么从python转向go」
 
 - date: 2015-5-17 17:37
-- tags: summary
+- tags: python,work
 - category: life
 
 -------------------
