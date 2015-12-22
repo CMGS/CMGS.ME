@@ -34,8 +34,8 @@ flannel 的 2 个方案表现也凑合，其中 vxlan 方案是因为没法开 u
 **劣势**：没法实现固定 IP 的容器漂移，没法多子网隔离，对上层设计依赖度高，没有 IPAM，对 docker 启动方法有绑定   
 
 docker 原生 overlay 方案，其实也是基于 vxlan 实现的。受限于 cloud 上不一定会开的网卡 udp offload，vxlan 方案的性能上限就是裸机的 55% 左右了。大体表现上与 flannel vxlan 方案几乎一致。   
-**优势**：docker 原生，性能凑合
-**劣势**：对内核要求高（&gt;3.16, 当然新版已经不做要求），对 docker daemon 有依赖需求 ( consul / etcd )，本身驱动实现还是略差点，可以看到对 cpu 利用率和带宽比同样基于 vxlan 的 flannel  要差一些，虽然有 api 但对 network 以及多子网隔离局部交叉这种需求还是比较麻烦，IPAM 就是个渣
+**优势**：docker 原生，性能凑合  
+**劣势**：对内核要求高（&gt;3.16, 当然新版已经不做要求），对 docker daemon 有依赖需求 ( consul / etcd )，本身驱动实现还是略差点，可以看到对 cpu 利用率和带宽比同样基于 vxlan 的 flannel  要差一些，虽然有 api 但对 network 以及多子网隔离局部交叉这种需求还是比较麻烦，IPAM 就是个渣  
 
 综上，云上能用 BGP 就果断上 calico bgp 方案，不能用 BGP 也可以考虑 calico ipip tunnel 方案，如果是 coreos 系又能开 udp offload，flannel 是不错的选择。docker network 还有很长一段路要走，weave 就去死吧。
 
