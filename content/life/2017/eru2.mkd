@@ -6,7 +6,7 @@
 
 -------------------
 
-作为自己30岁之前的一个「小目标」，白天我提交完最后一个大特质修正后，[Eru2](https://github.com/projecteru2) 的开源计划就走入了倒计时阶段。2007-2017 眨眼10年。启蒙于 hongqn 的豆瓣后端体系介绍而步入了系统工程师的深坑，受教于金山快盘的工程化实践，又有幸与启蒙自己的豆瓣平台组共事两年一起做 Douban App Engine，在 (*)aaS 的道路上越走越远。14年洲际旅行回国，从芒果TV 到 ENJOY ，从最初的 DAE Copy on docker 到理论上国内首批大规模使用 Redis Cluster 并提供了 Cerberus 和容器化解决方案，这后面驱动的都是我一直想做的大一统平台。
+作为自己30岁之前的一个「小目标」，白天我提交完最后一个大特质修正后，[Eru2](https://github.com/projecteru2) 的开源计划就走入了倒计时阶段。2007-2017 眨眼10年。启蒙于 hongqn 的豆瓣后端体系介绍而步入了系统工程师的深坑，受教于[金山快盘](http://www.kuaipan.cn/)的工程化实践，又有幸与启蒙自己的豆瓣平台组共事两年一起做 Douban App Engine，在 (*)aaS 的道路上越走越远。14年洲际旅行回国，从芒果TV 到 ENJOY ，从最初的 DAE Copy on [docker](https://github.com/moby/moby) 到理论上国内首批大规模使用 Redis Cluster 并提供了 Cerberus 和容器化解决方案，这后面驱动的都是我一直想做的大一统平台。
 
 幸运的是，有 Docker，DAE 当年隔离的问题再也不是问题 。不幸的是，有 Docker，容器的不稳定在大集群下面对管理提出了更高的要求。Docker 就像一把双刃剑，关键是你怎么去用它。Borg 提供了一个视角，而它的亲儿子 Kubernetes 以压倒性的优势成为了平台层面的事实标准。在它的身后，角落里 Docker 的亲儿子 Swarm 还在负隅顽抗，而它的身边，是一个叫 Mesos 的尸体。
 
