@@ -9,7 +9,7 @@
 
 Hi! My name is **Kelvin Peng** (aka **CMGS** elsewhere).
 
-I am currently living in China. You can reach me by
+I am currently living in Singapore. You can reach me by
 [Twitter](https://twitter.com/CMGS1988) or contact <ilskdw@gmail.com>.
 
 
