@@ -4,8 +4,8 @@
 #: site information
 site = {
     'name': 'Nolla',
-    'url': 'http://cmgs.me',
-    'feed': 'http://cmgs.me/feed.xml',
+    'url': 'https://cmgs.me',
+    'feed': 'https://cmgs.me/feed.xml',
 }
 
 config = {
@@ -67,6 +67,10 @@ theme = {
         'disqus': 'Nolla',
         'analytics': 'UA-11479633-1',
         'allow_comment_on_secret_post': True,
+        'author': {
+            'website': 'https://cmgs.me',
+            'name': 'CMGS',
+        },
 
         'navigation': [
             {'title': 'Life', 'link': '/life/'},
@@ -74,13 +78,12 @@ theme = {
             {'title': 'Archive', 'link': '/archive'},
         ],
         'elsewhere': [
-            {'name': 'Photo', 'link': 'http://mem.cmgs.me'},
             {'name': 'GitHub', 'link': 'https://github.com/CMGS'},
             {'name': 'Bitbucket', 'link': 'https://bitbucket.org/CMGS'},
             {'name': 'Twitter', 'link': 'https://twitter.com/CMGS1988'},
-            {'name': 'Facebook', 'link': 'http://facebook.com/cmgs1988'},
-            {'name': 'Douban', 'link': 'http://www.douban.com/people/CMGS'},
-            {'name': 'Weibo', 'link': 'http://weibo.com/cmgs'},
+            {'name': 'Facebook', 'link': 'https://facebook.com/cmgs1988'},
+            {'name': 'Douban', 'link': 'https://www.douban.com/people/CMGS'},
+            {'name': 'Weibo', 'link': 'https://weibo.com/cmgs'},
         ],
 
         'descriptions': {
