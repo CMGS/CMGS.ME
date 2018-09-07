@@ -1,7 +1,3 @@
-deps:
-	git submodule init
-	git submodule update
-
 build:
 	liquidluck build
 
