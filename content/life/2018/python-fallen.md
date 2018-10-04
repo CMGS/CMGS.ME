@@ -10,7 +10,7 @@
 
 工程选择上前有狼后有虎，排头的 JAVA / C / CPP 系只要自己不作，基本是干不赢的。要知道即便是人力成本贼高的「精通 C/CPP 」从业人员，就能产出的东西而言比招一个玩 Python 玩得 6 的高到不知道哪里去了，更何况 JAVA 狗遍地走，人力成本你拿头去比啊。后面 Go 这种比你复杂不了多少，一个静态强类型语言工程管理成本大幅降低，最不济的人家至少不会去争 tab 还是 space 对吧。重写就有性能数量级的提升，还容易部署，开发运维都开心。
 
-再看看 Python 这十几年都干了啥。10年前后 CPython 2 性能还能压着 Ruby 打，和 PHP 干得有来有回。现在一看 Performance，连 Ruby 都能跳到 Python 头上踩一脚了，别提 [Pypy](https://pypy.org/) ，根本就上不了生产。11年的时候国内本来用 Python 的就少，我在金山做性能方面调研的时候算国内很早接触了 [Gevent](http://www.gevent.org/)/[fapws3](https://github.com/william-os4y/fapws3)/[uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/) 的人，做了几次测试，写了几篇文章，翻译了几个报告，感觉这些东西真鸡儿棒，整个社区在这方面百花齐放，尤其是 Gevent。后来自己用 Gevent 实操了快盘的改造，又来到豆瓣以它为底层构建了 Douban App Engine，在 Python 2 的时代实现了全异步 IO 的应用框架，用过的开发都是爽得不要不要的。
+再看看 Python 这十几年都干了啥。10年前后 CPython 2 性能还能压着 Ruby 打，和 PHP 干得有来有回。现在一看 [Performance](https://benchmarksgame-team.pages.debian.net/benchmarksgame/faster/ruby.html)，连 Ruby 都能跳到 Python 头上踩一脚了，别提 [Pypy](https://pypy.org/) ，根本就上不了生产。11年的时候国内本来用 Python 的就少，我在金山做性能方面调研的时候算国内很早接触了 [Gevent](http://www.gevent.org/)/[fapws3](https://github.com/william-os4y/fapws3)/[uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/) 的人，做了几次测试，写了几篇文章，翻译了几个报告，感觉这些东西真鸡儿棒，整个社区在这方面百花齐放，尤其是 Gevent。后来自己用 Gevent 实操了快盘的改造，又来到豆瓣以它为底层构建了 Douban App Engine，在 Python 2 的时代实现了全异步 IO 的应用框架，用过的开发都是爽得不要不要的。
 
 然后喵的又过了 6 年再看，都他妈 Python 3.7 了，大清都亡了百来年了，算上 [tornado](https://www.tornadoweb.org/en/stable/) 这种显式 Promise/Future 的框架，能在生产中能弄起来的还是那么几样东西：Gevent，tornado，[greenify](https://github.com/douban/greenify) 和 flask/django 然后用 [gunicorn](https://gunicorn.org/) 跑。
 
