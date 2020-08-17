@@ -51,15 +51,15 @@
 
 首先是彻底去掉 libgit2 的依赖，转为 go-git。libgit2 的作风实在是充满槽点，莫名其妙从 0.28 跳到了 1.0，每个版本都是最好最靠谱的版本。然后就是 git2go 莫名其妙的版本管理，经常性换个镜像就编译不能，只能手工的编译这些 C level 的组件。go-git 就没这些问题了，功能不全都是小事，反正能用到的就那么多，还可以跨平台编译，因此在发布上我们也开始提供 Darwin 的 Core 二进制发布。
 
-另外还有 etcd 的依赖问题，这也是个很恼人的[事情](https://github.com/etcd-io/etcd/issues/11154)，花了不少时间从 github 的 coreos 下 etcd 依赖切换到了 go.etcd.io，也算是跟上官方发布节奏了，不然真的是 incompatible 版本用一辈子，一更新就各种报错。就私人来说，我对 etcd 这个项目的工程质量表示很不满意，至少作为阿里最年轻的 P9 的作品不应该这样粗糙。作为库，它没有真正意义上的「发布」，你要吃很多的屎踩很多的坑才能把它用得像个库的样子。作为服务，我们不但发现了一个按年算横跨几个版本的 [Bug](https://github.com/etcd-io/etcd/pull/12135)(是的，从 issue 到最后解决方案，官方没任何反馈)，也在 txn 的使用上尝试了各种姿势，受到了一万点暴击。所以我从不迷信什么 CNCF Apache 这样的光环，前人挖坑，后人踩屎，都是码农谁不知道谁啊。
+另外还有 etcd 的依赖问题，这也是个很恼人的[事情](https://github.com/etcd-io/etcd/issues/11154)，花了不少时间从 github 的 coreos 下 etcd 依赖切换到了 go.etcd.io，也算是跟上官方发布节奏了，不然真的是 incompatible 版本用一辈子，一更新就各种报错。就私人来说，我对 etcd 这个项目的工程质量表示很不满意，至少作为阿里最年轻的 P9 的作品不应该这样粗糙。作为库，它没有真正意义上的「发布」，你要吃很多的屎踩很多的坑才能把它用得像个库的样子，比如依赖问题比如 embed etcd 垃圾文件问题。作为服务，我们不但发现了一个按年算横跨几个版本的 [Bug](https://github.com/etcd-io/etcd/pull/12135)( 是的，从 issue 到最后解决方案，官方没任何反馈 )，也在 txn 的使用上尝试了各种姿势，受到了一万点暴击。所以我从不迷信什么 CNCF/Apache 这样的光环，前人挖坑，后人踩屎，都是码农谁不知道谁啊。
 
-最后就是 Core 本身的 HA 支持，Core 确实是 stateless 的组件，但其 client 就需要来判活并作出不同的行为，或者传统的加一层反向代理。我们在最新的版本里面引入了 gRPC 自身的 HA/LB [机制](https://github.com/projecteru2/core/pull/241)，来使得 Client 端能更智能的找到「活着」的 Core 进行请求，并且这一机制的加入能使得 Core 能够真正的 self-deploy。
+最后就是 Core 本身的 HA 支持，Core 确实是 stateless 的组件，但这需要 Client 来判活并作出不同的 failover 行为，或者传统的加一层反向代理。我们在最新的版本里面引入了 gRPC 自身的 HA/LB [机制](https://github.com/projecteru2/core/pull/241)，来使得 Client 端能更智能的找到「活着」的 Core 进行请求，并且这一机制的加入能使得 Core 能够真正的 self-deploy。
 
 ### 未来
 
-就像开篇所说，我做私有云已经做吐了，公有云技术的出发点和难点都和私有云不太一样。我们现在基本是按照公有云的路子在做私有云，多租户强隔离是一开始就考虑的要素之一。就 Eru 这块来说，磁盘作为资源维度可以很方便的接入我们计划的分布式块存储，在我们自己的 RDS 项目上实现某种意义上的数据和计算分离，在 VM 项目上实现完全体的 EC2。对于 NUMA 的支持则使得我们在使用如 Huawei kunlun 这样 NUMA 架构的机器时最大化其性能能力，降低上面每个服务的单位成本。
+就像开篇所说，我做私有云已经做吐了，公有云技术的出发点和难点都和私有云不太一样。我们现在基本是按照公有云的路子在做私有云，多租户强隔离是一开始就考虑的要素之一。我们也在关注 KataContainer 但觉得短期内并不能在功能上完全覆盖 VM 的场景。就 Eru 这块来说，磁盘作为资源维度可以很方便的接入我们计划的分布式块存储，在我们自己的 RDS 项目上实现某种意义上的数据和计算分离，在 VM 上实现完全体的 EC2（ 除了绑独立存储我们已经实现了几乎所有 EC2 的能力，动态扩容缩容，动态 attach 磁盘等 ）。对于 NUMA 的支持则使得我们在使用如 Huawei kunlun 这样 NUMA 架构的机器时最大化其性能能力，降低上面每个服务的单位成本。
 
-我们在今年会彻底解决 Docker 或者说容器这块「先天」的 IP 动态性[问题](https://github.com/moby/moby/pull/39961)。目前 calico 官方已经停更了 [libnetwork-plugin](https://github.com/projectcalico/libnetwork-plugin)，而这个项目最后的[版本](https://github.com/projectcalico/libnetwork-plugin/pull/183)是我写的，因此我 port 了一份放在了[这里](https://github.com/projecteru2/minions)。基于这个插件我们会尝试自定义 IPAM 来满足 IP 分配/释放能力，确保同一非 Remove 行为的容器保证永远都得到一样的 IP。另外就是通过 [Barrel](https://github.com/projecteru2/barrel) 项目绕开 Docker daemon 对于 Remove/Stop 行为等效判断机制，从上层控制 IP 生命周期。当然这 2 个都只是用来解决基于 Docker 怎么办这个问题，而 Docker 式微之后有很多需求没实现在我看来还是挺……糟心的：
+我们在今年会彻底解决 Docker 或者说容器这块「先天」的 IP 动态性[问题](https://github.com/moby/moby/pull/39961)( 是的这个 PR 也是我们提出来的 )。目前 calico 官方已经停更了 [libnetwork-plugin](https://github.com/projectcalico/libnetwork-plugin)这个插件，而这个项目最后的[版本](https://github.com/projectcalico/libnetwork-plugin/pull/183)是我写的，因此我 port 了一份放在了[这里](https://github.com/projecteru2/minions)。基于这个插件我们会尝试自定义 IPAM 来满足 IP 分配/释放能力，确保同一非 Remove 行为的容器保证永远都得到一样的 IP。另外就是通过 [Barrel](https://github.com/projecteru2/barrel) 项目绕开 Docker daemon 对于 Remove/Stop 行为等效判断机制，从上层控制 IP 生命周期。当然这 2 个都只是用来解决基于 Docker 怎么办这个问题，而 Docker 式微之后有很多需求没实现在我看来还是挺……糟心的：
 
 1. 缺乏外部 Volume 大小限制（ XFS 可行，Extfs4 需要改点东西，最新版本没看也不知道怎么样了）。
 2. 缺乏外部 Volume 清理机制，对于有状态的服务来说还是蛮有用的。
@@ -68,6 +68,6 @@
 5. 教练我想用 CNI 的插件，他们的大腿更粗。
 6. 一如既往的健壮性问题，包括不仅限于循环依赖，IO 操作阻塞等。
 
-因此在「神秘人」的帮助下我们会基于 Containerd 来实现这个「Docker」引擎，用于替换目前的 Docker daemon。同时对于缺乏的 PaaS 能力这个问题，神秘人会发布他实现的 Pipe Workflow 项目，类似于 K8s 的 [Argo](https://github.com/argoproj/argo)，我个人还是蛮期待的。另外就是很多朋友问我 VM 的引擎实现，目前我司开源政策尚不明确，行政阻力还是蛮大的，如果我有时间的话我自己会实现一个 Clean room 的版本。
+因此在「神秘人」的帮助下我们会基于 Containerd 来实现这个「Docker」引擎，用于替换目前的 Docker daemon。同时对于缺乏的 PaaS 能力这个问题，神秘人会发布他实现的 Pipe Workflow 项目，类似于 K8s 的 [Argo](https://github.com/argoproj/argo)，我个人还是蛮期待的。另外就是很多朋友问我 VM 的引擎实现，由于目前我司开源政策尚不明确，行政阻力还是蛮大的，如果我有时间的话我自己会实现一个 Clean room 的版本。
 
 最后老实说我也惊讶于公司几十亿美刀到超越百度也就是半年的事，虽然口里说着不想做 Eru 了唉早点换 K8s 让我退休吧但既然有这么个机会可以搞它一票大的，那自然还是想搏一搏单车变摩托的，万一以后虾皮也走上了阿里老路呢对吧。身体嘛，总是诚实的，况且就我们这种更偏向大一统的用况来说，成本上还真不好说谁高谁低。所以咯，如果有兴趣搞个「公有云」历史进程的朋友，赶紧来简历吧。
