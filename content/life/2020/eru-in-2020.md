@@ -14,14 +14,14 @@
 
 ### 状态
 
-经过一年的 CRUD，目前 Eru 的代码已经从 10K 行膨胀到了 18K 行，当然横向对比来说依然称得上是「最简单」的资源编排和调度系统。随着公司快速发展的这 2 年期间，我记忆里面关于 Eru 的事故并且产生了影响的只有 2 个，要想一个旁路系统能给主业务造成影响实在是太难了：
+经过一年的 CRUD，目前 Eru 的代码已经从 10K 行膨胀到了 18K 行，当然横向对比来说依然称得上是「最简单」的资源编排和调度系统。随着公司快速发展的这 2 年期间，我记忆里面关于 Eru 的事故并且产生了影响的只有 2 个，要让一个旁路系统能给主业务造成影响实在是太难了：
 
-1. 标准 stdout/stderr 日志收集阻塞。
+1. 通过 stdout/stderr 收集日志导致进程阻塞。
 2. physical server down 导致状态检查机制失效。
 
-对于 1 来说，在 container 时代大多数的日志都是走 stdout/stderr 输出的，对于 eru 而言其 agent 一大部分能力就是日志转发，基于 attach 接口，有且只有 1MB Cache，并且是同步接口，因此是有阻塞进程风险的。以前我们在 ENJOY 也遇到过，当时是强力的 flex 折腾了一套基于 syslog + kafka 的 flow 撑住了异常情况下巨量日志的输出，而现在我们并没这套机制。为此我们设计了一个 [buffered pipe](https://github.com/projecteru2/agent/pull/32) 来解决这个问题，允许在巨量日志的情况下，agent 自身可以通过丢日志来防止阻塞进程。
+对于 1 来说，container 时代大多数的日志都是走 stdout/stderr 输出的，对于 Eru 而言就是其 Agent 负责日志转发，基于 attach 接口。这个接口有且只有 1MB Cache，并且是同步的，因此在极限情况下会阻塞容器进程。以前我们在 ENJOY 也遇到过，当时是强力的 flex 折腾了一套基于 syslog + kafka 的 flow 撑住了异常情况下巨量日志的输出，然而 Shopee 并没这套机制。为此我们设计了一个 [buffered pipe](https://github.com/projecteru2/agent/pull/32) 来解决这个问题，允许在巨量日志的情况下，agent 自身可以通过丢日志来防止阻塞进程。
 
-当然你说能不能用 logs 接口而非 attach 接口了，当然是可以的。但 logs 接口需要 journal/json-file 的 log driver，前者依然会有阻塞问题，后者有磁盘管理问题，并且我们需要给每条日志打上一定的元数据标签。在巨量日志的前提下，丢日志比起阻塞业务损失小多了。
+当然你说能不能用 logs 接口而非 attach 接口了，当然是可以的。但 logs 接口需要 journal/json-file 的 log driver，前者依然会有阻塞问题，后者有磁盘管理问题，并且我们需要给每条日志打上一定的元数据标签。在巨量日志的前提下，丢日志比起阻塞业务不可用的损失小多了。
 
 对于 2 来说，这算是我个人偷懒，毕竟有着 flex 的前提下报警是早于 agent 猝死的，因此我并未去实现基于 ttl 的探活机制。在这次事故后，我改写了整个 health check 的[流程](https://github.com/projecteru2/core/pull/150)，基于 etcd 的 ttl 实现了被动报活。
 
