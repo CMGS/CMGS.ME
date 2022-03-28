@@ -8,7 +8,7 @@
 
 > 现在可以说 k8s 也不过如此了
 
-我在前年写下 [Eru in 2020](https://cmgs.me/life/eru-in-2020) 的时候我也没想到它的续集要到 2022 才有，而且是在我离职之后。我依然感激历史的进程成就了 [Eru](https://github.com/projecteru2)，也证明其实不跟 CNCF 也没啥，整体成本还更低。满打满算人力 3+1，全量集群 > N0K nodes（N > 2)，单一 Eru Core 管理 > 5K nodes（这也是一个 k8s 典型集群上限，borg 的中位数是 10K，而我们很接近），并且横跨多地（洲际）。当然随着我的离职它未来的命运可能多舛，101 们又不懂 infra 砍腿在北京扩团队换 k8s 也是正常。但无所谓了，Eru 现在是一个整体解决方案，也有了第三代目的 Core Maintainer，我这几年的努力也算没有白花，只希望未来在某个地方它能真正实现大一统架构吧。
+我在前年写下 [Eru in 2020](https://cmgs.me/life/eru-in-2020) 的时候我也没想到它的续集要到 2022 才有，而且是在我离职之后。我依然感激历史的进程成就了 [Eru](https://github.com/projecteru2)，也证明其实不跟 CNCF 也没啥，整体成本还更低。满打满算人力 3+1，全量集群 > N0K nodes（N > 2)，单一 Eru Core 管理 > 5K nodes（这也是一个 k8s 典型集群上限，borg 的中位数是 10K，而我们很接近），并且横跨多地（洲际）。当然随着我的离职它未来的命运可能多舛，101 们又不懂 infra 砍腿在北京扩团队换 k8s 也是正常。但无所谓了，Eru 现在是一个整体解决方案，也有了第三代目的 [Core Maintainer](https://github.com/DuodenumL)，我这几年的努力也算没有白花，只希望未来在某个地方它能真正实现大一统架构吧。
 
 毕竟，作为 infra builder，大一统架构是我最后追求的东西了。
 
@@ -25,7 +25,7 @@
 7. [Docker-cni](https://github.com/projecteru2/docker-cni)
 8. [Systemd-runtime](https://github.com/projecteru2/systemd-runtime)
 
-毕竟作为大一统的架构，多种运行时调度是必须的，而且在这过程中我们还是顺手的解决了 Container 的一些问题，比如 Fixed IP，比如 CNI support 等。
+作为大一统的架构，多种运行时调度是必须的，而且在这过程中我们还是顺手的解决了 Container 的一些问题，比如 Fixed IP，比如 CNI support 等。
 
 在第三代目 Core Maintainer 的 [Resource Plugin](https://github.com/projecteru2/core/pull/491) 最终 Review 和合并后，Eru 本身的调度将拥有无限制资源维度扩展能力，这个资源可以是硬件资源，也可以是 Software Defined Resource 比如 K8s 里面的亲和性逻辑等。比起 K8s 的 Extend Resource 这个机制更加强大和灵活。加上本身 Eru 拥有[「赤道上最好的 CPU 调度逻辑」](https://github.com/projecteru2/core/issues/339)，支持 NUMA，支持 Local Volume 等多维度资源调度分配能力，老实说资源调度这块我们还是有信心说出这句「 k8s 也不过如此」的。
 
@@ -35,17 +35,17 @@
 
 Eru 毕竟是靠着编排调度容器起家，因此过去 2 年我们还是做了不少容器方向工作了，其一就是彻底解决容器 Fixed IP 的问题。
 
-从原理上来说容器其实就是进程的 namespace 展开，读过《三体》都知道质子的二维展开，本质上其实类似。进程的生命周期等同于 namespace 的生命周期，这也是为什么 docker 无法区分 stop 和 remove 的原因 ———— 本质上进程都停止了，namespace 都回收了，因此 IP 也就释放了。
+从原理上来说容器其实就是进程的 namespace 展开，读过《三体》都知道质子的二维展开，容器本质上其实类似。进程的生命周期等同于 namespace 的生命周期，这也是为什么 docker 无法区分 stop 和 remove 的原因——进程都停止了，namespace 都回收了，因此 IP 也就释放了。
 
 因此传统的手段上，要么富容器结构，自定义 init 什么的跑到死，穿着裤子来控制容器内业务进程，尽可能保持容器持续运行。要么就是 k8s 这类组合形态的 Pod，专门有个一直运行的容器负责 namespace，真实业务进程通过 join 的方式共享 namespace 里面的一切，当然也就包含 IP。
 
-但无论哪种方式，依然没有解决如果这个 Pod 或者这个容器 Stop 之后 IP 还是会回收怎么办这个问题。所以我们决定从网络插件入手，说起来可以追溯到我修改过的最后一个版本的 [Calico-libnetwork-plugin](https://github.com/projectcalico/libnetwork-plugin/pull/183)，但和传统自定义 CNI/CNM 不一样的在于，我们决定给 Docker 套层壳，于是我们就有了 [Barrel](https://github.com/projecteru2/barrel) 这个项目。其核心逻辑是区分 Stop 和 Remove 行为，遇到 Stop 的请求则把 IP 放到另外一个地方而不是回到 IP Pool，遇到 Remove 再真正去 Release IP。当然有人就要问了，为啥不直接改插件呢，这就涉及到我们未来的规划，我们其实还是想基于 [containerd](https://containerd.io/) 实现自己的容器 runtime 的，因此做 wrapper 的话更合适，方便未来的迁移。
+但无论哪种方式，依然没有解决如果这个 Pod 或者这个容器 Stop 之后 IP 还是会回收怎么办这个问题。所以我们决定从网络插件入手，说起来可以追溯到我修改过的最后一个版本的 [Calico-libnetwork-plugin](https://github.com/projectcalico/libnetwork-plugin/pull/183)，但和传统自定义 CNI/CNM 不一样的在于，我们决定给 Docker 套层壳，于是我们就有了 [Barrel](https://github.com/projecteru2/barrel) 这个项目。其核心逻辑是区分 Stop 和 Remove 行为，遇到 Stop 的请求则把 IP 放到另外一个地方而不是回到 IP Pool，遇到 Remove 再真正去 Release IP。当然有人就要问了，为啥不直接改插件呢，这就涉及到我们未来的规划，我们其实还是想基于 [containerd](https://containerd.io/) 实现自己的容器 runtime 的，做一些功能增强，比如状态清理和迁移等，因此做 wrapper 的话更合适，方便未来的迁移。
 
-另外就是 Docker 对 CNI 的支持，在 K8s 崛起之后 Docker 以及它提出的标准基本都不太行了，其中就包括 CNM 接口。Calico 很早就放弃了 libnetwork plugin 的维护，我们于是决定去支持 CNI。但明显 Eru 不是 CNCF 那种「Cloud Native」的玩意，想要在 Docker 上去支持 CNI 就需要废一些周折，于是在第二代目 Core Maintainer 的努力下，于是我们有了 [Docker-cni](https://github.com/projecteru2/docker-cni) 这个项目，通过 oci 的 hook，使得 Docker 原生也能正常使用 CNI 的插件，从而实现生命的大和谐。
+另外就是 Docker 对 CNI 的支持，在 K8s 崛起之后 Docker 以及它提出的标准基本都不太行了，其中就包括 CNM 接口。Calico 很早就放弃了 libnetwork plugin 的维护，我们于是决定去支持 CNI。明显 Eru 不是 CNCF 那种「Cloud Native」的玩意，想要在 Docker 上去支持 CNI 就需要费一些周折，于是在第二代目 [Core Maintainer](https://github.com/jschwinger233) 的努力下，于是我们有了 [Docker-cni](https://github.com/projecteru2/docker-cni) 这个项目，通过 oci 的 hook，使得 Docker 原生也能正常使用 CNI 的插件，从而实现生命的大和谐。
 
 而这两个项目如果一帆风顺大概率是会 Merge 在一起的，最终发展成某个有着 fancy 名字的容器运行时，只不过目前应该看不到这天了吧。 
 
-### 关于大一统的其他引擎
+### 关于其他引擎
 
 I have a dream that one day 哦不好意思串场了，但作为 infra builder 大一统架构确实是很多人想实现的。比如前司既搞 k8s 又想搞 openstack 这种听起来就觉得不够 fancy ，而且他们也没解决网络控制面和转发面的统一。而我们的组使用 Eru 所做的业务已经有了大一统的雏形了，支持容器，支持虚拟机，支持裸进程等。
 
