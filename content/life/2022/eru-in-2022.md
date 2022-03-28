@@ -29,7 +29,7 @@
 
 在第三代目 Core Maintainer 的 [Resource Plugin](https://github.com/projecteru2/core/pull/491) 最终 Review 和合并后，Eru 本身的调度将拥有无限制资源维度扩展能力，这个资源可以是硬件资源，也可以是 Software Defined Resource 比如 K8s 里面的亲和性逻辑等。比起 K8s 的 Extend Resource 这个机制更加强大和灵活。加上本身 Eru 拥有[「赤道上最好的 CPU 调度逻辑」](https://github.com/projecteru2/core/issues/339)，支持 NUMA，支持 Local Volume 等多维度资源调度分配能力，老实说资源调度这块我们还是有信心说出这句「 k8s 也不过如此」的。
 
-另外值得一提是 [Agent](https://github.com/projecteru2/agent) 本身也将迎来新的重构，虽然目前它已经[支持](https://github.com/projecteru2/agent/pull/73) 虚拟机监控了但我们觉得还是可以再改吧改吧的。旁路系统的好处就是系统不管怎么崩对业务没有什么影响，2020 的时候我说过只有 2 次事故，而到了 2022 依然还是这 2 个。
+另外值得一提是 [Agent](https://github.com/projecteru2/agent) 本身也将迎来新的重构，虽然目前它已经[支持](https://github.com/projecteru2/agent/pull/73)虚拟机监控了但我们觉得还是可以再改吧改吧的。旁路系统的好处就是系统不管怎么崩对业务没有什么影响，2020 的时候我说过只有 2 次事故，而到了 2022 依然还是这 2 个。
 
 ### 关于容器的一切
 
@@ -39,23 +39,23 @@ Eru 毕竟是靠着编排调度容器起家，因此过去 2 年我们还是做�
 
 因此传统的手段上，要么富容器结构，自定义 init 什么的跑到死，穿着裤子来控制容器内业务进程，尽可能保持容器持续运行。要么就是 k8s 这类组合形态的 Pod，专门有个一直运行的容器负责 namespace，真实业务进程通过 join 的方式共享 namespace 里面的一切，当然也就包含 IP。
 
-但无论哪种方式，依然没有解决如果这个 Pod 或者这个容器 Stop 之后 IP 还是会回收怎么办这个问题。所以我们决定从网络插件入手，说起来可以追溯到我修改过的最后一个版本的 [Calico-libnetwork-plugin](https://github.com/projectcalico/libnetwork-plugin/pull/183)，但和传统自定义 CNI/CNM 不一样的在于，我们决定给 Docker 套层壳，于是我们就有了 [Barrel](https://github.com/projecteru2/barrel) 这个项目。其核心逻辑是区分 Stop 和 Remove 行为，遇到 Stop 的请求则把 IP 放到另外一个地方而不是回到 IP Pool，遇到 Remove 再真正去 Release IP。当然有人就要问了，为啥不直接改插件呢，这就涉及到我们未来的规划，我们其实还是想基于 [containerd](https://containerd.io/) 实现自己的容器 runtime 的，做一些功能增强，比如状态清理和迁移等，因此做 wrapper 的话更合适，方便未来的迁移。
+但无论哪种方式，依然没有解决如果这个 Pod 或者这个容器 Stop 之后 IP 还是会回收怎么办这个问题。所以我们决定从网络插件入手，说起来可以追溯到我修改过的最后一个版本的 [Calico-libnetwork-plugin](https://github.com/projectcalico/libnetwork-plugin/pull/183)，但和传统自定义 CNI/CNM 网络插件不一样的在于，我们决定给 Docker 套层壳，于是我们就有了 [Barrel](https://github.com/projecteru2/barrel) 这个项目。其核心逻辑是区分 Stop 和 Remove 行为，遇到 Stop 的请求则把 IP 放到另外一个地方而不是回到 IP Pool，遇到 Remove 再真正去 Release IP。当然有人就要问了，为啥不直接改插件呢，这就涉及到我们未来的规划，我们其实还是想基于 [containerd](https://containerd.io/) 实现自己的容器 runtime 的，做一些功能增强，比如状态清理和迁移等，因此做 wrapper 的话更合适，方便未来的迁移。
 
-另外就是 Docker 对 CNI 的支持，在 K8s 崛起之后 Docker 以及它提出的标准基本都不太行了，其中就包括 CNM 接口。Calico 很早就放弃了 libnetwork plugin 的维护，我们于是决定去支持 CNI。明显 Eru 不是 CNCF 那种「Cloud Native」的玩意，想要在 Docker 上去支持 CNI 就需要费一些周折，于是在第二代目 [Core Maintainer](https://github.com/jschwinger233) 的努力下，于是我们有了 [Docker-cni](https://github.com/projecteru2/docker-cni) 这个项目，通过 oci 的 hook，使得 Docker 原生也能正常使用 CNI 的插件，从而实现生命的大和谐。
+另外就是 Docker 对 CNI 的支持，在 K8s 崛起之后 Docker 以及它提出的标准基本都不太行了，其中就包括 CNM 接口。Calico 很早就放弃了 libnetwork plugin 的维护，我们于是决定去支持 CNI。明显 Eru 不是 CNCF 那种「Cloud Native」的玩意，想要在 Docker 上去支持 CNI 就需要费一些周折，于是在第二代目 [Core Maintainer](https://github.com/jschwinger233) 的努力下，我们有了 [Docker-cni](https://github.com/projecteru2/docker-cni) 这个项目，通过 oci 的 hook，使得 Docker 原生也能正常使用 CNI 的插件，从而实现生命的大和谐。
 
-而这两个项目如果一帆风顺大概率是会 Merge 在一起的，最终发展成某个有着 fancy 名字的容器运行时，只不过目前应该看不到这天了吧。 
+而这两个项目如果一帆风顺大概率是会 Merge 在一起的，最终发展成某个有着 fancy 名字的容器运行时，这也是我们规划中三走的最后一步，只不过目前应该看不到这天了吧。 
 
 ### 关于其他引擎
 
-I have a dream that one day 哦不好意思串场了，但作为 infra builder 大一统架构确实是很多人想实现的。比如前司既搞 k8s 又想搞 openstack 这种听起来就觉得不够 fancy ，而且他们也没解决网络控制面和转发面的统一。而我们的组使用 Eru 所做的业务已经有了大一统的雏形了，支持容器，支持虚拟机，支持裸进程等。
+I have a dream that one day 哦不好意思串场了，但作为 infra builder 大一统架构确实是很多人想实现的。比如前司既搞 k8s 又想搞 openstack 这种听起来就觉得不够 fancy ，而且他们也没解决网络控制面和转发面的统一。而我们的组使用 Eru 所做的业务已经有了大一统的雏形了，支持容器，支持虚拟机，支持裸进程等，all in one, one for all。
 
 虚拟机的实现 [Yavirt](https://github.com/projecteru2/yavirt) 和传统 [kubevirt](https://kubevirt.io/) 和 [virtlet](https://github.com/Mirantis/virtlet) 不一样的在于，它既不像后者那样需要一个容器的 namespace 辅助提供网络接入手段（其实前者也有类似情况，VMI 的 POD 提供网络等资源），也不像前者一样 VM:VMI 1:1 这样浪费资源，同时使用的接口和传统 k8s 的接口还不一样（毕竟是 CRD 扩展出来的资源）。更重要的是根据 [KISS 原则](https://zh.wikipedia.org/zh/KISS%E5%8E%9F%E5%88%99)，Yavirt 是可以脱离 Eru 运行的，就像 Docker 一样。
 
-你看虽然大家都是围着 libvirt 玩的魔法，但确实玩得都不一样。Yavirt 在前司落地之后服务了近百个团队，提供了原生的容器支持，最重要的是它的网络控制面和转发面是和容器引擎统一的，在最新的实现中都是基于 CNI interface。某种意义上来说不管是哪种网络，不管是哪种运行环境，Yavirt 都可以做到和容器侧的互通。
+你看虽然大家都是围着 libvirt 玩的魔法，但确实玩得都不一样。Yavirt 在前司落地之后服务了近百个团队，提供了原生的虚拟机支持，最重要的是它的网络控制面和转发面是和容器引擎统一的，在最新的实现中都是基于 CNI interface。某种意义上来说不管是哪种网络，不管是哪种运行环境，Yavirt 都可以做到和容器侧的互通。
 
 全功能（HOT/COLD Mirgration，DISK Bind，IOPS Guaranteed 等），傻子都能用的高效独立 VM Engine，这是我们向大一统架构迈出的很重要一步。原计划是 RDS 整个服务都用它不过按照现在这光景，难了。
 
-至于对 systemd 的[支持](https://github.com/projecteru2/systemd-runtime)还处于社会主义初级阶段，但通过对 containerd 的 hook 我们依然可以在目前的版本上实现对机器上任意裸进程的控制，包括接入 SDN，还是蛮像 [systemd-nspawn](https://www.freedesktop.org/software/systemd/man/systemd-nspawn.html) 的。不过讲实话我们搞这个项目的时候就发现 systemd 功能真是多，namespace，chroot 啥的都有，得空做一个 systemd version 的 docker 也不是不可能。
+至于对 systemd 的[支持](https://github.com/projecteru2/systemd-runtime)还处于社会主义初级阶段，但通过对 containerd 的 hook 我们依然可以在目前的版本上实现对机器上任意裸进程的控制，包括接入 SDN，还是蛮像 [systemd-nspawn](https://www.freedesktop.org/software/systemd/man/systemd-nspawn.html) 的。讲实话我们搞这个项目的时候就发现 systemd 功能真是多，namespace，chroot 啥的都有，得空做一个 systemd version 的 docker 也不是不可能。
 
 ### 其他
 
