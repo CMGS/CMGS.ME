@@ -40,7 +40,7 @@ When it comes to memory, more is not always better. While we can achieve a "huge
 
 In our CacheCloud, there are two values for the maximum memory size per instance. In most cases, it is 16GB, but there are special cases where it can be 32GB. It's important to note that we cannot use up all the system's memory. Some memory needs to be reserved for other tasks and system requirements. Additionally, we must consider the extra memory overhead caused by the Copy-On-Write (COW) mechanism during full sync process.
 
-Honestly when designing and implementing CacheCloud, the trade-offs mentioned are just a small part of the overall picture. For example, asking customers to transform hash data into simple strings with prefix data is one approach. And it's important to note that Redis Cluster is also an eventually consistent system, and we cannot guarantee strong consistency for reads and writes. After all, solving the CAP theorem problem would require a significant effort. 
+Honestly when designing and implementing CacheCloud, the trade-offs mentioned are just a small part of the overall picture. For example, asking customers to transform hash data into simple strings with prefix data is one approach. And it's important to note that Redis Cluster is also an eventually consistent system, and we cannot guarantee strong consistency for reads and writes. After all, solving the [CAP theorem](https://en.wikipedia.org/wiki/CAP_theorem) problem would require a significant effort. 
 
 Can we do it? - Of course, we can.<br/>
 Can we change it? - Sure, no problem.
