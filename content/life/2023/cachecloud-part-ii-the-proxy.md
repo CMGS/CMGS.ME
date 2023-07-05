@@ -21,9 +21,9 @@ When it comes to forwarding commands as fast as possible, using the pipeline mod
 
 By those, we parse commands, calculate slot information similar to Redis, and directly send them to the correct instances in most cases. But there are still something we have to deal with.
 
-The fisrt on is how to handle blocking commands, such as `BLPOP`. How should we handle these commands to ensure optimal performance and prevent potential block?
+The first is how to handle blocking commands, such as `BLPOP`. How should we handle these commands to ensure optimal performance and prevent potential block?
 
-A simple solution is to spawn a separate connection exclusively for such commands. These types of commands are typically fewer in number compared to simple commands like `SET` `GET`. Therefore, the additional overhead of establishing a dedicated connection for these commands is acceptable and helps mitigate any potential blocking issues.
+A simple solution is to spawn a separate connection exclusively for such commands. These types of commands are typically fewer in number compared to simple commands like `SET` or `GET`. Therefore, the additional overhead of establishing a dedicated connection for these commands is acceptable and helps mitigate any potential blocking issues.
 
 The second thing is the handling of `MGET/MSET` commands, which are unique and popular among customers. Optimizing these commands in a clustered environment presents challenges. However, we will not delve into the specifics in this section. In the next section, we will provide an in-depth exploration of this topic, addressing the complexities and offering detailed insights.
 
@@ -39,13 +39,13 @@ return responses
 
 With this simple proxy, the complexities of Redis Cluster are hidden, allowing your clients to easily use it just like standalone Redis. Everything seems perfect until instances fail, master-slave switching occurs, another node initiates slot migration or whatever. Then your inbox is flooded with alerting emails and the error rate starts to rise.
 
-Then you realized that you have to ensure the accuracy of routing and slot infomation.
+Then you realized that you have to ensure the accuracy of the slot infomation.
 
-Continuing with our CacheCloud, when the command parsed by the `hiredis`, normally it will be calculated and forward direct to the correct backend instance. However, if a slot has been migrated (resulting in a `MOVE` response), the proxy updates the routing table to reflect the new slot information.
+Continuing with our CacheCloud, after the command parsed by the `hiredis`, normally it will be calculated and forwarded direct to the correct backend instance. However, if a slot has been migrated (resulting in a `MOVE` response), the proxy will update the routing table to reflect the new slot information.
 
-At the same time, the proxy will send `cluster nodes` to one of the backend periodically to ensure that all information remains up to date. By querying the Redis Cluster nodes regularly, the proxy can refresh its routing and slot information and maintain the accuracy of the routing table.
+At the same time, the proxy will send `cluster slots` to one of the backend periodically to ensure that all information remains up to date. By querying the Redis Cluster nodes regularly, the proxy can refresh its routing and slot information and maintain the accuracy actively.
 
-From then on, no matter what happens in the cluster, the proxy can accurately and efficiently forward the corresponding basic command to the correct backend Redis instance. 
+From then on, no matter what happens in the cluster, the proxy can  forward the corresponding basic command to the correct backend Redis instance accurately and efficiently.
 
 In the upcoming section, we will delve into another two important aspects:
 
