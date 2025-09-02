@@ -63,7 +63,7 @@
    <li>2020 PR 1-2 抽签，2022 也是</li>
    <li>2020 到 2022，2CS 阶段跟 PR 无关，全岛 SC 后花园</li>
    <li>2023 当前的申请情况
-   <center>![alt 开销](/media/2023/2023-singapore-primary-1/1.png "status")</center>
+   <center>![alt status](/media/2023/2023-singapore-primary-1/1.png "status")</center>
    </li>
    </ol>
    你是个 PR 你怕不怕嘛，全都知道这家算是 PR 稳进天花板之一，但万一要是没中呢？
