@@ -7,6 +7,7 @@
         text-transform: uppercase;
         color: #bcbcbc;
     }
+
     #main h3 {
         font-family: "Helvetica", arial, sans-serif;
     }
@@ -22,7 +23,7 @@
 <div class="entry-list">
     {% for cat in resource.category -%}
     <h3>{{cat|title}}</h3>
-    {% set posts = resource.category[cat][:5] -%}
+    {% set posts = resource.category[cat][:10] -%}
     {% for post in posts -%}
     <div class="entry-item">
         <time class="updated" datetime="{{post.date|xmldatetime}}">{{post.date.strftime("%Y-%m-%d")}}</time>
@@ -32,4 +33,3 @@
     {% endfor %}
 </div>
 {% endblock %}
-
