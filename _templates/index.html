@@ -23,7 +23,7 @@
 <div class="entry-list">
     {% for cat in resource.category -%}
     <h3>{{cat|title}}</h3>
-    {% set posts = resource.category[cat][:10] -%}
+    {% set posts = resource.category[cat][:15] -%}
     {% for post in posts -%}
     <div class="entry-item">
         <time class="updated" datetime="{{post.date|xmldatetime}}">{{post.date.strftime("%Y-%m-%d")}}</time>
