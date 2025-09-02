@@ -18,8 +18,8 @@ host &lt; calico(bgp) &lt; calico(ipip) = flannel(vxlan) = docker(vxlan) &lt; fl
 
 具体结果如下图
 
-<center>![带宽](/media/docker-network-cloud/59.pic.jpg "带宽")</center>
-<center>![延迟](/media/docker-network-cloud/138.pic.jpg "延迟")</center>
+<center>![带宽](/media/2015/docker-network-cloud/1.jpg "带宽")</center>
+<center>![延迟](/media/2015/docker-network-cloud/2.jpg "延迟")</center>
 
 weave(udp) 真是惨，生产环境就别考虑了。看了下他们的架构，觉得即便是 fast-data-path 也没多大意义。   
 **优势**：无   
@@ -41,6 +41,6 @@ docker 原生 overlay 方案，其实也是基于 vxlan 实现的。受限于 cl
 
 最后，放一个在物理机上测试 macvlan 和裸网卡的对比图，1G 带宽的物理机。
 
-<center>![macvlan](/media/docker-network-cloud/146.pic.jpg "macvlan vs host")</center>
+<center>![macvlan](/media/2015/docker-network-cloud/3.jpg "macvlan vs host")</center>
 
 呵呵哒，退云保平安，亿万 macvlan 平带宽……

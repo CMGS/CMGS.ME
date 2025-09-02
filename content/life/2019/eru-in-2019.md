@@ -32,7 +32,7 @@ K8s 的复杂度和基础设施的侵入性，以及我们真的需要 all in on
 
 首先要做的，就是抽离 Docker Engine 的绑定。讲实话用 Docker Engine 的 API 自己写调度啊也是一言难尽，可以明显看到多人协作下的风格割裂，比如有一个描述 Container 信息既有 Info 结构体又有 ContainerJSON 结构体，一个传值居多一个传引用居多。抽离之后，就可以实现自己的 Agent/Kublet 等来自定义 Executor 行为。
 
-<center>![alt 内部结构](/media/eru-in-2019/eru.png "内部结构")</center>
+<center>![alt 内部结构](/media/2019/eru-in-2019/1.png "内部结构")</center>
 
 通过 Engine 的抽象使得 Eru 统一的计算资源和编排目标分布，然后根据不同的任务属性在不同的机器上部署 VM，容器或者其他类型的东西，甚至可以是 shell 命令，对于上层用户而言完全透明。在我自己的实验中，简单的实现了几个 Kubelet 的接口，就可以「像 K8s 一样部署 Pod」了。
 

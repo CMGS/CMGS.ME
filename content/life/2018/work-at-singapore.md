@@ -18,13 +18,13 @@
 
 比如曾经在 ENJOY 失败的把容器当虚拟机使用，又是搞 ssh proxy 又是搞特殊的用户名规则。现在在这边的云上直接抹去了这种差异性，路由表直接下发。对强隔离调度的需求，在 Core 里面我抽离了 Engine 具体实现，只要符合 docker engine APIClient 的实现都可以拿来用，混合调度和编排 docker/hyper/kata/bare VM/各种公有云服务器甚至未来的 linuxd 都统一在了同样的 API 下。至于用到的是什么，用户完全透明。资源控制，彻底统一。再比如关于容器更新，以前要么留 50% 的资源冗余，要么忍受先下老的再上新的带来的风险，现在直接提供原子化的 in-place replacement 从 API 层面完全解决这种风险和资源浪费，用户只管无脑用就行了。我们自己测试环境前前后后也上万容器的生生死死了，还没见着一例不一致。还有什么自举啊，完全模块化就不说了，这轮子和测试写到我自闭。
 
-<center>![每个模块都可以替换](/media/work-at-singapore/eru.webp "每个模块都可以替换")</center>
+<center>![每个模块都可以替换](/media/2018/work-at-singapore/1.webp "每个模块都可以替换")</center>
 
 当然了，只有 [Eru](https://github.com/projecteru2/core) 还是不够的，好在勾搭我的那个豆瓣红人还是个前端。我活着么大，哪有过前端给我造 UI 啊，只会用 Bootstrap 的后端要什么自行车。那么抄 UI 这活，抄就要抄最好的 Qingcloud 啦，于是我们搞了个看上去性冷淡的界面。
 
-<center>![Redis Cluster](/media/work-at-singapore/redis.webp "Redis Cluster")</center>
+<center>![Redis Cluster](/media/2018/work-at-singapore/2.webp "Redis Cluster")</center>
 
-<center>![Virtualdev](/media/work-at-singapore/virtualdev.webp "Virtualdev")</center>
+<center>![Virtualdev](/media/2018/work-at-singapore/3.webp "Virtualdev")</center>
 
 加上一个不愿意透露姓名的酒仙桥 C 语言第一人，随便搞了个 280W QPS 的 Redis Proxy，现在又再写全新的 KV 存储服务。全云化之后，作为一个穷人版的 PaaS 应该是堪用了，余下的就是磨产品和正儿八经工作流了（如果给机会的话）。明年的话不出意外我司应该能有豆瓣巅峰期4位 Tech 2+ 级别的工程师，但一想到曾经看过头条内部云产品，差距还是太大，毕竟他们有 300 人干这个活。我要是能有 300 人的做这件事，不对一半就行了，踏平整个东南亚反攻大陆好吗……
 

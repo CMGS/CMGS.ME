@@ -24,19 +24,19 @@
 
 于是抵达东京采购了一番其他装备（东京真是户外天堂，各种你知道的不知道的牌子量大价优恨不得手都剁没，以后再写东京户外装备购物指南吧）之后，我来到了富士吉田市做最后的准备。
 
-<center>![alt 吃还是得吃的](/media/climb-mt-fuji/1.jpg "吃还是得吃的")</center>
+<center>![alt 吃还是得吃的](/media/2019/climb-mt-fuji/1.jpg "吃还是得吃的")</center>
 
 ### 富士吉田市
 
 富士吉田市就在河口湖下面，比起旅游热门地点河口湖安静了许多，从这里出发的 local bus 去吉田线入口五合目空座位更多，也更方便。我抵达这里的时候还巧遇河口湖湖上祭，类似于日本传统花火大会。作为长沙土著，只能表示这烟花比起橘子洲烟花来说简直弱爆了，花样数量频率都不够看。不过后面热海的夏季海上花火大会总算扳回一城，但那又是另外一个故事了。
 
-<center>![alt 人太多，只能随便拍拍了](/media/climb-mt-fuji/2.jpg "人太多，只能随便拍拍了")</center>
-<center>![alt 一路都是和服妹子们](/media/climb-mt-fuji/3.jpg "一路都是和服妹子们")</center>
-<center>![alt 第二天拍完这个就去了五合目](/media/climb-mt-fuji/4.jpg "第二天拍完这个就去了五合目")</center>
+<center>![alt 人太多，只能随便拍拍了](/media/2019/climb-mt-fuji/2.jpg "人太多，只能随便拍拍了")</center>
+<center>![alt 一路都是和服妹子们](/media/2019/climb-mt-fuji/3.jpg "一路都是和服妹子们")</center>
+<center>![alt 第二天拍完这个就去了五合目](/media/2019/climb-mt-fuji/4.jpg "第二天拍完这个就去了五合目")</center>
 
 隔天早起坐公交去了吉田五合目入口，顺便逛了下五合目。总的来说物价有些增高，但毕竟是人气最旺的「旅游胜地」，比起后面那些起飞的价格，吉田五合目相对还是实在一些。我走富士宫线下山最后撑着的那口气就是「前面到五合目就有便宜的可乐了」，然而直到到了富士宫五合目我才发现一瓶依然要 300 JPY，能抵山下2瓶，而吉田才卖 200 JPY。等小伙伴到齐后，拍了个令和游客照，开爬！
 
-<center>![alt 没赶上平成年最后一波，只能做令和第一批了](/media/climb-mt-fuji/5.jpg "没赶上平成年最后一波，只能做令和第一批了")</center>
+<center>![alt 没赶上平成年最后一波，只能做令和第一批了](/media/2019/climb-mt-fuji/5.jpg "没赶上平成年最后一波，只能做令和第一批了")</center>
 
 ### 吉田线
 
@@ -46,12 +46,12 @@
 
 要注意的是山上的小屋是真的贵，带咖喱饭一泊两餐大通铺一晚 7600 JPY，厕所 200 JPY。对比东京顶级的胶囊旅社一般也就在 3000 JPY ~ 5000 JPY 的样子，可以看出山上小屋的价格还是挺高的。当然了，既然晚餐是管饱不限量的咖喱饭，那就尽可能的吃回一些成本吧，也为后半段的行程存储能量。
 
-<center>![alt 五到六基本没压力](/media/climb-mt-fuji/6.jpg "五到六基本没压力")</center>
-<center>![alt 走了一段后到了「真」登山口](/media/climb-mt-fuji/7.jpg "走了一段后到了「真」登山口")</center>
-<center>![alt 住的就是这种大通铺，贵得一批](/media/climb-mt-fuji/8.jpg "住的就是这种大通铺，贵得一批")</center>
-<center>![alt 左下角那灰蒙蒙的地方就是上来的碎石 Z 路](/media/climb-mt-fuji/9.jpg "左下角那灰蒙蒙的地方就是上来的碎石 Z 路")</center>
-<center>![alt 然后就成这样了，深夜开爬真是很累](/media/climb-mt-fuji/10.jpg "然后就成这样了，深夜开爬真是很累")</center>
-<center>![alt Fenix 5 记录](/media/climb-mt-fuji/11.jpg "Fenix 5 记录")</center>
+<center>![alt 五到六基本没压力](/media/2019/climb-mt-fuji/6.jpg "五到六基本没压力")</center>
+<center>![alt 走了一段后到了「真」登山口](/media/2019/climb-mt-fuji/7.jpg "走了一段后到了「真」登山口")</center>
+<center>![alt 住的就是这种大通铺，贵得一批](/media/2019/climb-mt-fuji/8.jpg "住的就是这种大通铺，贵得一批")</center>
+<center>![alt 左下角那灰蒙蒙的地方就是上来的碎石 Z 路](/media/2019/climb-mt-fuji/9.jpg "左下角那灰蒙蒙的地方就是上来的碎石 Z 路")</center>
+<center>![alt 然后就成这样了，深夜开爬真是很累](/media/2019/climb-mt-fuji/10.jpg "然后就成这样了，深夜开爬真是很累")</center>
+<center>![alt Fenix 5 记录](/media/2019/climb-mt-fuji/11.jpg "Fenix 5 记录")</center>
 
 过了鸟居庄之后，路就变得崎岖起来，大量的时间需要手脚并用的爬。因此如果选择住七合目的话，晚上起来冲顶会比白天过这段路更加艰难。我们大概 4 点左右抵达鸟居庄，晚上 10 点 30 起来冲顶，1 点不到抵达山顶。如果是在御来光馆的话，可以放宽到 11-12 点左右起床冲顶，自然更加轻松。
 
@@ -59,11 +59,11 @@
 
 然后一群冻得瑟瑟发抖的鹌鹑们，等来了富士山的御来光（日出）。往左，河口湖和富士吉田市闪着光芒，往右，伊豆半岛和太平洋海岸线清晰可见，往下，山中湖弥漫着雾气，山腰上一条光线的长龙那是还未登顶的登山客，火山日出的视野确实棒。
 
-<center>![alt 慑慑发抖还要抢位置](/media/climb-mt-fuji/12.jpg "慑慑发抖还要抢位置")</center>
-<center>![alt 只能自拍了](/media/climb-mt-fuji/13.jpg "只能自拍了")</center>
-<center>![alt 山中湖正上方](/media/climb-mt-fuji/14.jpg "山中湖正上方")</center>
-<center>![alt 视野毫无遮挡](/media/climb-mt-fuji/15.jpg "视野毫无遮挡")</center>
-<center>![alt Fenix 5 记录](/media/climb-mt-fuji/16.jpg "Fenix 5 记录")</center>
+<center>![alt 慑慑发抖还要抢位置](/media/2019/climb-mt-fuji/12.jpg "慑慑发抖还要抢位置")</center>
+<center>![alt 只能自拍了](/media/2019/climb-mt-fuji/13.jpg "只能自拍了")</center>
+<center>![alt 山中湖正上方](/media/2019/climb-mt-fuji/14.jpg "山中湖正上方")</center>
+<center>![alt 视野毫无遮挡](/media/2019/climb-mt-fuji/15.jpg "视野毫无遮挡")</center>
+<center>![alt Fenix 5 记录](/media/2019/climb-mt-fuji/16.jpg "Fenix 5 记录")</center>
 
 ### 富士山顶
 
@@ -73,9 +73,9 @@
 
 富士山山顶除了地理意义之外其实没啥，有一些鸟居，坟墓，和冰水处理装置。除了日出，光秃秃的一片。大多数人看上去并不知道剑峰才是富士山最高点，等日出结束就走吉田下去了，老实说算是白来了吧。不过从剑峰下来的那条路是真的难，全碎石，滑，坡陡，几乎无支撑物。没想到到的是，这仅仅才是开始。
 
-<center>![alt 火山口是真的没啥](/media/climb-mt-fuji/17.jpg "火山口是真的没啥")</center>
-<center>![alt 最高峰留念](/media/climb-mt-fuji/18.jpg "最高峰留念")</center>
-<center>![alt 逆富士](/media/climb-mt-fuji/19.jpg "逆富士")</center>
+<center>![alt 火山口是真的没啥](/media/2019/climb-mt-fuji/17.jpg "火山口是真的没啥")</center>
+<center>![alt 最高峰留念](/media/2019/climb-mt-fuji/18.jpg "最高峰留念")</center>
+<center>![alt 逆富士](/media/2019/climb-mt-fuji/19.jpg "逆富士")</center>
 
 ### 富士宫线
 
@@ -85,7 +85,7 @@
 
 然后一看富士宫五合目的那个可乐，还是要 300 JPY，但有什么办法呢，喝吧。整个行程来看，基本上是 4 小时从 3776 下降到 2400，短短 12 小时内先摸黑通宵升 800 再速降 1300，要说爬富士山就跟爬泰山一样遛弯遛着就上去了这我还是不认同的。尤其是从富士宫口上下的话，得要做好万全的准备。
 
-<center>![alt Fenix 5 记录](/media/climb-mt-fuji/20.jpg "Fenix 5 记录")</center>
+<center>![alt Fenix 5 记录](/media/2019/climb-mt-fuji/20.jpg "Fenix 5 记录")</center>
 
 ### 最后
 

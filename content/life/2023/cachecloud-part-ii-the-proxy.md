@@ -8,7 +8,7 @@
 
 A typical client request to Redis Cluster is depicted in the diagram below:
 
-<center>![alt request](/media/cachecloud-part-ii-the-proxy/reqresp.png "MOVE")</center>
+<center>![alt request](/media/2023/cachecloud-part-ii-the-proxy/1.png "MOVE")</center>
 
 As you can see, the complexity of requesting Redis Cluster lies in handling the `MOVE` response. Without a proxy, the client handles it, which may result in lower overhead but requires a higher level of client implementation. In a proxy-based architecture, we need to consider the two fundamental aspects:
 

@@ -14,7 +14,7 @@
 
 对于坡县来说，比起中国的毛坯房可以埋光纤或者屏蔽 Cat 7 一类的网线，县里的 Condo 基本精装毫无办法，不过新一点的至少也是超 6 起步，也算有了物理的万兆基础。但要注意的是县里的强电箱一般比较奇葩，为了「更容易」操作浪费了很多设备柜的「净深」，如下图所示：
 
-<center>![](/media/home-10g-v1/utils.jpeg "")</center>
+<center>![](/media/2022/home-10g-v1/1.jpeg "")</center>
 
 可以看到洗衣机空间的净深是大于上面设备柜的，设备柜加了个板子在柜子中间把强电设备装在了上面。这样的坏处一是浪费了柜子净深，二是这个深度你是放不下 1U 设备的，只能选择买一些小型家用路由交换机等，自然也就达不到我的目的了。
 
@@ -40,12 +40,12 @@ AP 的话自然就是 Unifi 的 [FlexHD](https://store.ui.com/products/unifi-fle
 
 最后整个拓扑图如下：
 
-<center>![](/media/home-10g-v1/topology.jpeg "")</center>
+<center>![](/media/2022/home-10g-v1/2.jpeg "")</center>
 
 <h3>尾声</h3>
 
 至此整个第一代万兆局域网完工，但由于 Odorid H2+ 的问题 AIO 实际上没有起到 All in one 的作用。比如我想跑 [Home Assistant](https://www.home-assistant.io/) 就搞起来比较麻烦，毕竟 CPU 也菜得抠脚。当然布局也是比较奇葩，所有的设备都丢在强电箱空间内，买了个 PWM 调速器，接上了之前 PC 换下来的 3 个 14mm PC 风扇散热，环境非常恶劣。得亏这群设备耐操，目前运行一切正常。
 
-<center>![](/media/home-10g-v1/real.jpeg "")</center>
+<center>![](/media/2022/home-10g-v1/3.jpeg "")</center>
 
 于是苟了 2 年后，大规模升级开始了！

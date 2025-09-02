@@ -56,4 +56,4 @@
 
 最后，有兴趣的话可以来 QCon Shanghai 听我讲讲我们这个 team 在 Shopee 做的一点微小的工作，不敢说有多好，但也没那么无聊，再不济还能面个基是吧，那么就上海见啦。
 
-<center>![alt 海报](/media/before-qcon/1.jpg "海报")</center>
+<center>![alt 海报](/media/2019/before-qcon/1.jpg "海报")</center>

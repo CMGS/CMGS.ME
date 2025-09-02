@@ -22,11 +22,11 @@
 
 很多候选者最关心的就是开销问题，确实新加坡的整体成本在全世界是排得上号的，当我习惯坡县后去任何国家包括中国日本花钱，都感觉不要钱一样。这里我先发一个我日常开销统计，再来和介绍每个子类的情况。
 
-<center>![alt 开销](/media/life-in-singapore/1.jpg "开销")</center>
+<center>![alt 开销](/media/2020/life-in-singapore/1.jpg "开销")</center>
 
 19 年 8 月的时候帮我妈兑换了若干美元，因此取了 3300 SGD，大体上我一个月一人养全家是在 6000 SGD 左右，这基本上是一个人养活全家的天花板开销了。
 
-<center>![alt 分类](/media/life-in-singapore/2.jpg "分类")</center>
+<center>![alt 分类](/media/2020/life-in-singapore/2.jpg "分类")</center>
 
 这其中，大头就是住，基本是一半以上。
 
